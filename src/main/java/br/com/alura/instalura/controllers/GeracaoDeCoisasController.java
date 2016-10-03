@@ -19,7 +19,7 @@ public class GeracaoDeCoisasController {
 
 	@GetMapping("/gera/usuario")
 	public String geraUsuario() {
-		Usuario usuario = new Usuario("alots", "123456");
+		Usuario usuario = new Usuario("alots", "123456","https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/11199408_569104449895751_1837574990_a.jpg");
 		em.persist(usuario);
 		return "usuario com id " + usuario.getId();
 	}

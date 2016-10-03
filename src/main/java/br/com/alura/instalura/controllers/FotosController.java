@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.instalura.daos.FotoDao;
+import br.com.alura.instalura.dtos.outputs.FotoResponse;
+import br.com.alura.instalura.mappers.FotosMapper;
 import br.com.alura.instalura.models.Foto;
 
 @RestController
@@ -20,7 +22,8 @@ public class FotosController {
 	private FotoDao fotoDao;
 
 	@GetMapping(value="/api/fotos/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Foto> busca(@PathVariable("id") Integer idUsuario) {
-		return fotoDao.findByUsuarioId(idUsuario);
+	public List<FotoResponse> busca(@PathVariable("id") Integer idUsuario) {
+		List<Foto> fotos = fotoDao.findByUsuarioId(idUsuario);
+		return FotosMapper.map(fotos);
 	}
 }

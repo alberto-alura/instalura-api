@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario {
 	@Id
@@ -16,6 +18,8 @@ public class Usuario {
 	private String login;
 	@NotBlank
 	private String senha;
+	@NotBlank
+	private String urlFotoPerfil;
 	
 	/**
 	 * @deprecated
@@ -25,14 +29,24 @@ public class Usuario {
 	}
 	
 	
-	public Usuario(String login, String senha) {
+	public Usuario(String login, String senha,String urlFotoPerfil) {
 		this.login = login;
 		this.senha = senha;
+		this.urlFotoPerfil = urlFotoPerfil;
 	}
 
 
 	public Integer getId() {
 		return id;
+	}
+	
+	public String getUrlFotoPerfil() {
+		return urlFotoPerfil;
+	}
+
+
+	public String getLogin() {
+		return login;
 	}
 	
 	

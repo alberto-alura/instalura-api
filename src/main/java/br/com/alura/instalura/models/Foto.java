@@ -1,5 +1,8 @@
 package br.com.alura.instalura.models;
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +19,8 @@ public class Foto {
 	private String url;
 	@ManyToOne
 	@NotNull
-	private Usuario usuario;
+	private Usuario usuario;		
+	private LocalDateTime instante = LocalDateTime.now();
 	
 	/**
 	 * @deprecated
@@ -38,6 +42,15 @@ public class Foto {
 	
 	public Integer getId() {
 		return id;
+	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public LocalDateTime getInstante() {
+		return instante;
 	}
 	
 }
