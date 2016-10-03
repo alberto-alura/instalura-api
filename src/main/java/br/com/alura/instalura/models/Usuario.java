@@ -1,13 +1,16 @@
 package br.com.alura.instalura.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Usuario {
@@ -20,6 +23,8 @@ public class Usuario {
 	private String senha;
 	@NotBlank
 	private String urlFotoPerfil;
+	@ManyToMany
+	private Set<Usuario> amigos = new HashSet<Usuario>();
 	
 	/**
 	 * @deprecated
@@ -48,6 +53,39 @@ public class Usuario {
 	public String getLogin() {
 		return login;
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		return true;
+	}
+
+
+	public void adicionaAmigo(Usuario usuario) {
+		amigos.add(usuario);
+	}
+	
 	
 	
 }

@@ -18,10 +18,22 @@ public class GeracaoDeCoisasController {
 	private EntityManager em;
 
 	@GetMapping("/gera/usuario")
-	public String geraUsuario() {
-		Usuario usuario = new Usuario("alots", "123456","https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/11199408_569104449895751_1837574990_a.jpg");
-		em.persist(usuario);
-		return "usuario com id " + usuario.getId();
+	public String geraUsuariosEAmigos() {
+		Usuario alberto = new Usuario("alots", "123456","https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/11199408_569104449895751_1837574990_a.jpg");
+		Usuario rafael = new Usuario("rafael", "123456","https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/s150x150/12599387_1591433254512484_973178862_a.jpg");
+		Usuario vitor = new Usuario("vitor", "123456","https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/11348357_521348038019129_1965512179_a.jpg");
+		
+		
+		alberto.adicionaAmigo(rafael);
+		alberto.adicionaAmigo(vitor);
+		rafael.adicionaAmigo(vitor);
+		vitor.adicionaAmigo(alberto);
+		
+		em.persist(alberto);
+		em.persist(rafael);
+		em.persist(vitor);
+		
+		return "gerados";
 	}
 
 	@GetMapping("/gera/fotos")

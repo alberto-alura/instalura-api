@@ -23,7 +23,7 @@ public class FotosController {
 
 	@GetMapping(value="/api/fotos/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<FotoResponse> busca(@PathVariable("id") Integer idUsuario) {
-		List<Foto> fotos = fotoDao.findByUsuarioId(idUsuario);
+		List<Foto> fotos = fotoDao.buscaFotosDosAmigos(idUsuario);
 		return FotosMapper.map(fotos);
 	}
 }
