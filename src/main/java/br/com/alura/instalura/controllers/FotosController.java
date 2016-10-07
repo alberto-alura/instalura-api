@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,11 +46,10 @@ public class FotosController {
 
 	@Transactional
 	@PostMapping(value = "/api/fotos/{idFoto}/like", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Set<LikerResponse> like(@PathVariable("idFoto") Integer id) {
+	public Set<LikerResponse> like(@PathVariable("idFoto") Integer id,@AuthenticationPrincipal Usuario logado) {
 
 		Foto foto = fotoDao.findOne(id);
-		Usuario alberto = usuarioDao.findOne(1);
-		foto.adicionaLikeDo(alberto);
+		foto.adicionaLikeDo(logado);
 		return LikerResponse.map(foto.getLikers());
 	}
 
@@ -57,10 +57,9 @@ public class FotosController {
 	@PostMapping(value = "/api/fotos/{idFoto}/comment", 
 		consumes = MediaType.APPLICATION_JSON_VALUE, 
 		produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<ComentariosResponse> comment(@RequestBody ComentarioForm comentarioForm, @PathVariable("idFoto") Integer idFoto) {
-		Usuario alberto = usuarioDao.findOne(1);
+	public List<ComentariosResponse> comment(@RequestBody ComentarioForm comentarioForm, @PathVariable("idFoto") Integer idFoto,@AuthenticationPrincipal Usuario logado ) {
 		
-		Comentario comentario = comentarioForm.build(alberto);
+		Comentario comentario = comentarioForm.build(logado);
 		comentarioDao.save(comentario);
 		
 		Foto foto = fotoDao.findOne(idFoto);
