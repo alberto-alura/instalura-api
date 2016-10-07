@@ -19,7 +19,7 @@ public class ComentariosResponse {
 		return login;
 	}
 	
-	public String getComentario() {
+	public String getTexto() {
 		return texto;
 	}
 

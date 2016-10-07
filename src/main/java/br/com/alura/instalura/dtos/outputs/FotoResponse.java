@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import br.com.alura.instalura.models.Comentario;
 import br.com.alura.instalura.models.Foto;
 
 public class FotoResponse {

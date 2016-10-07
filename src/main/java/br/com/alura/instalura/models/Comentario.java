@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Comentario {
@@ -13,7 +16,9 @@ public class Comentario {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	@ManyToOne
+	@NotNull
 	private Usuario usuario;
+	@NotBlank
 	private String texto;
 
 	/**
@@ -38,5 +43,9 @@ public class Comentario {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 }
