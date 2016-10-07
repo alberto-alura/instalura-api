@@ -12,24 +12,31 @@ public class LoginDTO {
 
 	@NotBlank
 	@Email
-	private String email;
+	private String login;
 	@NotBlank
-	private String password;
+	private String senha;
 
-	public String getEmail() {
-		return email;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
+
+	@Override
+	public String toString() {
+		return "LoginDTO [login=" + login + ", senha=" + senha + "]";
+	}
+	
+	
 
 }

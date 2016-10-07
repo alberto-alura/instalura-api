@@ -38,7 +38,7 @@ class StatelessLoginFilter extends AbstractAuthenticationProcessingFilter {
 
 		final LoginDTO login = new ObjectMapper().readValue(request.getInputStream(), LoginDTO.class);
 		final UsernamePasswordAuthenticationToken loginToken = new UsernamePasswordAuthenticationToken(
-				login.getEmail(), login.getPassword());
+				login.getLogin(), login.getSenha());
 		return getAuthenticationManager().authenticate(loginToken);
 	}
 
