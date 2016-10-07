@@ -1,9 +1,10 @@
 package br.com.alura.instalura.dtos.outputs;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import br.com.alura.instalura.models.Foto;
 
@@ -16,6 +17,7 @@ public class FotoResponse {
 	private final Integer id;
 	private boolean likeada;
 	private Set<LikerResponse> likers = new HashSet<>();
+	private List<ComentariosResponse> comentarios = new ArrayList<>();
 
 	public FotoResponse(Foto foto){
 		this.urlPerfil = foto.getUsuario().getUrlFotoPerfil();
@@ -26,6 +28,7 @@ public class FotoResponse {
 		this.likeada = !foto.getLikers().isEmpty();
 		
 		this.likers.addAll(LikerResponse.map(foto.getLikers()));
+		this.comentarios.addAll(ComentariosResponse.map(foto.getComentarios()));
 	}
 
 	public String getUrlPerfil() {
@@ -54,5 +57,9 @@ public class FotoResponse {
 	
 	public Set<LikerResponse> getLikers() {
 		return likers;
+	}
+	
+	public List<ComentariosResponse> getComentarios() {
+		return comentarios;
 	}
 }
