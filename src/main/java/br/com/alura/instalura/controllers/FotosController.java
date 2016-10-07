@@ -38,9 +38,9 @@ public class FotosController {
 	@Autowired
 	private ComentarioDao comentarioDao;
 
-	@GetMapping(value = "/api/fotos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<FotoResponse> busca(@PathVariable("id") Integer idUsuario) {
-		List<Foto> fotos = fotoDao.buscaFotosDosAmigos(idUsuario);
+	@GetMapping(value = "/api/fotos", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<FotoResponse> busca(@AuthenticationPrincipal Usuario logado) {
+		List<Foto> fotos = fotoDao.buscaFotosDosAmigos(logado.getId());
 		return FotosMapper.map(fotos);
 	}
 

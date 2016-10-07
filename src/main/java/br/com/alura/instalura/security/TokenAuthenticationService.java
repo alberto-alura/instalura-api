@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.util.StringUtils;
 
 public class TokenAuthenticationService {
 
@@ -23,7 +24,10 @@ public class TokenAuthenticationService {
     }
 
     public Authentication getAuthentication(HttpServletRequest request) {
-        final String token = request.getHeader(AUTH_HEADER_NAME);        
+        String token = request.getHeader(AUTH_HEADER_NAME);
+        if(!StringUtils.hasText(token)) {
+        	token = request.getParameter(AUTH_HEADER_NAME);
+        }
         if (token != null) {
             final UserDetails user = tokenHandler.parseUserFromToken(token);
             if (user != null) {
