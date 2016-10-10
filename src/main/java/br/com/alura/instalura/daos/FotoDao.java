@@ -15,4 +15,7 @@ public interface FotoDao extends CrudRepository<Foto, Integer>{
 	@Query("select f from Foto f where f.usuario.id in (select amigo.id from Usuario u join u.amigos amigo where u.id = :idUsuario)")
 	List<Foto> buscaFotosDosAmigos(@Param("idUsuario") Integer idUsuario);
 
+	@Query("select f from Foto f where f.usuario.login = :q")
+	List<Foto> buscaFotosPeloUsuario(@Param("q")String q);
+
 }

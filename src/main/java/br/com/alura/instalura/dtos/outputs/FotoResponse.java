@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import br.com.alura.instalura.models.Foto;
 
@@ -61,5 +62,9 @@ public class FotoResponse {
 	
 	public List<ComentariosResponse> getComentarios() {
 		return comentarios;
+	}
+	
+	public static List<FotoResponse> map(List<Foto> fotos) {
+		return fotos.stream().map(FotoResponse :: new).collect(Collectors.toList());
 	}
 }

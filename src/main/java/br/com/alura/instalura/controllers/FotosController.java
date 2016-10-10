@@ -22,7 +22,6 @@ import br.com.alura.instalura.dtos.inputs.ComentarioForm;
 import br.com.alura.instalura.dtos.outputs.ComentariosResponse;
 import br.com.alura.instalura.dtos.outputs.FotoResponse;
 import br.com.alura.instalura.dtos.outputs.LikerResponse;
-import br.com.alura.instalura.mappers.FotosMapper;
 import br.com.alura.instalura.models.Comentario;
 import br.com.alura.instalura.models.Foto;
 import br.com.alura.instalura.models.Usuario;
@@ -41,7 +40,7 @@ public class FotosController {
 	@GetMapping(value = "/api/fotos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<FotoResponse> busca(@AuthenticationPrincipal Usuario logado) {
 		List<Foto> fotos = fotoDao.buscaFotosDosAmigos(logado.getId());
-		return FotosMapper.map(fotos);
+		return FotoResponse.map(fotos);
 	}
 
 	@Transactional
@@ -66,6 +65,12 @@ public class FotosController {
 		foto.adicionaComentario(comentario);
 
 		return ComentariosResponse.map(foto.getComentarios());
+	}
+
+	@GetMapping(value="/api/busca",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<FotoResponse> busca(String q){
+		return FotoResponse.map(fotoDao.buscaFotosPeloUsuario(q));
 	}
 
 }
