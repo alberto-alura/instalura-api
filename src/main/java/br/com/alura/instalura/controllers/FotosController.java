@@ -67,10 +67,10 @@ public class FotosController {
 		return ComentariosResponse.map(foto.getComentarios());
 	}
 
-	@GetMapping(value="/api/busca",
+	@GetMapping(value="/api/fotos/{login}",
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<FotoResponse> busca(String q){
-		return FotoResponse.map(fotoDao.buscaFotosPeloUsuario(q));
+	public List<FotoResponse> buscaPorLogin(@PathVariable("login") String login){
+		return FotoResponse.map(fotoDao.buscaFotosPeloUsuario(login));
 	}
 
 }
