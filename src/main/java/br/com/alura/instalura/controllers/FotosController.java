@@ -6,7 +6,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +20,7 @@ import br.com.alura.instalura.daos.UsuarioDao;
 import br.com.alura.instalura.dtos.inputs.ComentarioForm;
 import br.com.alura.instalura.dtos.outputs.ComentarioResponse;
 import br.com.alura.instalura.dtos.outputs.FotoResponse;
+import br.com.alura.instalura.dtos.outputs.LikerResponse;
 import br.com.alura.instalura.models.Comentario;
 import br.com.alura.instalura.models.Foto;
 import br.com.alura.instalura.models.Usuario;
@@ -44,11 +44,11 @@ public class FotosController {
 
 	@Transactional
 	@PostMapping(value = "/api/fotos/{idFoto}/like", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> like(@PathVariable("idFoto") Integer id,@AuthenticationPrincipal Usuario logado) {
+	public LikerResponse like(@PathVariable("idFoto") Integer id,@AuthenticationPrincipal Usuario logado) {
 
 		Foto foto = fotoDao.findOne(id);		
 		foto.toggleLike(logado);
-		return ResponseEntity.ok().build();
+		return new LikerResponse(logado);
 	}
 
 	@Transactional
