@@ -18,6 +18,10 @@ public class ComentarioResponse {
 		this.id = comentario.getId();
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+	
 	public String getLogin() {
 		return login;
 	}
