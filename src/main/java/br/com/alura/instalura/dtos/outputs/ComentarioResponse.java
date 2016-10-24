@@ -1,16 +1,17 @@
 package br.com.alura.instalura.dtos.outputs;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.alura.instalura.models.Comentario;
 
-public class ComentariosResponse {
+public class ComentarioResponse {
 	
 	private String login;
 	private String texto;
 	
-	public ComentariosResponse(Comentario comentario){
+	public ComentarioResponse(Comentario comentario){
 		this.login = comentario.getUsuario().getLogin();
 		this.texto = comentario.getTexto();
 	}
@@ -23,7 +24,8 @@ public class ComentariosResponse {
 		return texto;
 	}
 
-	public static List<ComentariosResponse> map(List<Comentario> comentarios){
-		return comentarios.stream().map(ComentariosResponse :: new).collect(Collectors.toList());		
+	public static Collection<? extends ComentarioResponse> map(List<Comentario> comentarios) {
+		return comentarios.stream().map(ComentarioResponse :: new).collect(Collectors.toList());
 	}
+
 }

@@ -1,12 +1,12 @@
 package br.com.alura.instalura.controllers;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +19,8 @@ import br.com.alura.instalura.daos.ComentarioDao;
 import br.com.alura.instalura.daos.FotoDao;
 import br.com.alura.instalura.daos.UsuarioDao;
 import br.com.alura.instalura.dtos.inputs.ComentarioForm;
-import br.com.alura.instalura.dtos.outputs.ComentariosResponse;
+import br.com.alura.instalura.dtos.outputs.ComentarioResponse;
 import br.com.alura.instalura.dtos.outputs.FotoResponse;
-import br.com.alura.instalura.dtos.outputs.LikerResponse;
 import br.com.alura.instalura.models.Comentario;
 import br.com.alura.instalura.models.Foto;
 import br.com.alura.instalura.models.Usuario;
@@ -45,18 +44,18 @@ public class FotosController {
 
 	@Transactional
 	@PostMapping(value = "/api/fotos/{idFoto}/like", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Set<LikerResponse> like(@PathVariable("idFoto") Integer id,@AuthenticationPrincipal Usuario logado) {
+	public ResponseEntity<?> like(@PathVariable("idFoto") Integer id,@AuthenticationPrincipal Usuario logado) {
 
 		Foto foto = fotoDao.findOne(id);		
 		foto.toggleLike(logado);
-		return LikerResponse.map(foto.getLikers());
+		return ResponseEntity.ok().build();
 	}
 
 	@Transactional
 	@PostMapping(value = "/api/fotos/{idFoto}/comment", 
 		consumes = MediaType.APPLICATION_JSON_VALUE, 
 		produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<ComentariosResponse> comment(@RequestBody ComentarioForm comentarioForm, @PathVariable("idFoto") Integer idFoto,@AuthenticationPrincipal Usuario logado ) {
+	public ComentarioResponse comment(@RequestBody ComentarioForm comentarioForm, @PathVariable("idFoto") Integer idFoto,@AuthenticationPrincipal Usuario logado ) {
 		
 		Comentario comentario = comentarioForm.build(logado);
 		comentarioDao.save(comentario);
@@ -64,7 +63,7 @@ public class FotosController {
 		Foto foto = fotoDao.findOne(idFoto);
 		foto.adicionaComentario(comentario);
 
-		return ComentariosResponse.map(foto.getComentarios());
+		return new ComentarioResponse(comentario);
 	}
 
 	@GetMapping(value="/api/fotos/{login}",

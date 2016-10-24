@@ -18,7 +18,7 @@ public class FotoResponse {
 	private final Integer id;
 	private boolean likeada;
 	private Set<LikerResponse> likers = new HashSet<>();
-	private List<ComentariosResponse> comentarios = new ArrayList<>();
+	private List<ComentarioResponse> comentarios = new ArrayList<>();
 
 	public FotoResponse(Foto foto){
 		this.urlPerfil = foto.getUsuario().getUrlFotoPerfil();
@@ -29,7 +29,7 @@ public class FotoResponse {
 		this.likeada = !foto.getLikers().isEmpty();
 		
 		this.likers.addAll(LikerResponse.map(foto.getLikers()));
-		this.comentarios.addAll(ComentariosResponse.map(foto.getComentarios()));
+		this.comentarios.addAll(ComentarioResponse.map(foto.getComentarios()));
 	}
 
 	public String getUrlPerfil() {
@@ -60,7 +60,7 @@ public class FotoResponse {
 		return likers;
 	}
 	
-	public List<ComentariosResponse> getComentarios() {
+	public List<ComentarioResponse> getComentarios() {
 		return comentarios;
 	}
 	
