@@ -10,10 +10,12 @@ public class ComentarioResponse {
 	
 	private String login;
 	private String texto;
+	private Integer id;
 	
 	public ComentarioResponse(Comentario comentario){
 		this.login = comentario.getUsuario().getLogin();
 		this.texto = comentario.getTexto();
+		this.id = comentario.getId();
 	}
 	
 	public String getLogin() {

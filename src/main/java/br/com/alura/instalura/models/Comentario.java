@@ -48,4 +48,8 @@ public class Comentario {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+
+	public Integer getId() {
+		return id;
+	}
 }
