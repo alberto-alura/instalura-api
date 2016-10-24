@@ -47,8 +47,8 @@ public class FotosController {
 	@PostMapping(value = "/api/fotos/{idFoto}/like", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Set<LikerResponse> like(@PathVariable("idFoto") Integer id,@AuthenticationPrincipal Usuario logado) {
 
-		Foto foto = fotoDao.findOne(id);
-		foto.adicionaLikeDo(logado);
+		Foto foto = fotoDao.findOne(id);		
+		foto.toggleLike(logado);
 		return LikerResponse.map(foto.getLikers());
 	}
 

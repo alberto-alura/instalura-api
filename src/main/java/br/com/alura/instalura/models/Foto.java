@@ -78,5 +78,15 @@ public class Foto {
 	public void adicionaComentario(Comentario comentario) {
 		this.comentarios.add(comentario);
 	}
+
+
+	/**
+	 * 
+	 * @param usuario
+	 * @return o estado do like do usuario passado como argumento.
+	 */
+	public boolean toggleLike(Usuario usuario) {
+		return likers.contains(usuario) ? likers.remove(usuario) : likers.add(usuario);
+	}
 	
 }
