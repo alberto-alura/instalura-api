@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,8 +67,9 @@ public class FotosController {
 		return new ComentarioResponse(comentario);
 	}
 
-	@GetMapping(value="/api/fotos/{login}",
+	@GetMapping(value="/api/public/fotos/{login}",
 			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("permitAll")
 	public List<FotoResponse> buscaPorLogin(@PathVariable("login") String login){
 		return FotoResponse.map(fotoDao.buscaFotosPeloUsuario(login));
 	}

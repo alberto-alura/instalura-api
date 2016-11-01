@@ -1,9 +1,11 @@
 package br.com.alura.instalura.security;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -27,13 +29,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry authorizeRequests = http
-				.authorizeRequests();
-
+	protected void configure(HttpSecurity http) throws Exception {		
 		http.authorizeRequests()
-		.antMatchers("/api/public/login").permitAll()
-		.antMatchers(HttpMethod.POST, "/api/login").permitAll()
+		.antMatchers("/api/public/**").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/login").permitAll()		
 		
 		.anyRequest().authenticated()
 		.and()
