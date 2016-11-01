@@ -28,7 +28,7 @@ public class TokenAuthenticationService {
         if(!StringUtils.hasText(token)) {
         	token = request.getParameter(AUTH_HEADER_NAME);
         }
-        if (token != null) {
+        if (token != null && !token.equals("null")) {
             final UserDetails user = tokenHandler.parseUserFromToken(token);
             if (user != null) {
                 return new UserAuthentication(user);
