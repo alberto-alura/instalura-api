@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Foto {
 
@@ -31,6 +33,8 @@ public class Foto {
 	private Set<Usuario> likers = new HashSet<Usuario>();
 	@OneToMany
 	private List<Comentario> comentarios = new ArrayList<>();
+	@NotBlank
+	private String comentario;
 	
 	/**
 	 * @deprecated
@@ -40,10 +44,15 @@ public class Foto {
 	}
 
 
-	public Foto(String url, Usuario usuario) {
+	public Foto(String url, String comentario,Usuario usuario) {
 		super();
 		this.url = url;
+		this.comentario = comentario;
 		this.usuario = usuario;
+	}
+	
+	public String getComentario() {
+		return comentario;
 	}
 	
 	public String getUrl() {

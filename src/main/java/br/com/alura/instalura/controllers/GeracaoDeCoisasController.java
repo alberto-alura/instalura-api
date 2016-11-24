@@ -41,9 +41,11 @@ public class GeracaoDeCoisasController {
 		Usuario usuario = em.find(Usuario.class, usuarioId);
 		Foto foto1 = new Foto(
 				"https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-15/e35/14482111_1635089460122802_8984023070045896704_n.jpg?ig_cache_key=MTM1MzEzNjM4NzAxMjIwODUyMw%3D%3D.2",
+				"comentario da foto",
 				usuario);
 		Foto foto2 = new Foto(
 				"https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-15/e35/14553274_1838794796339803_7123267564666355712_n.jpg?ig_cache_key=MTM1MzEzNzgyMzkwNTk3MzI2OA%3D%3D.2",
+				"comentario da foto",
 				usuario);
 		
 		em.persist(foto1);

@@ -19,6 +19,7 @@ public class FotoResponse {
 	private boolean likeada;
 	private Set<LikerResponse> likers = new HashSet<>();
 	private List<ComentarioResponse> comentarios = new ArrayList<>();
+	private String comentario;
 
 	public FotoResponse(Foto foto){
 		this.urlPerfil = foto.getUsuario().getUrlFotoPerfil();
@@ -26,10 +27,15 @@ public class FotoResponse {
 		this.horario = foto.getInstante().format(DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm"));
 		this.urlFoto = foto.getUrl();
 		this.id = foto.getId();
+		this.comentario = foto.getComentario();
 		this.likeada = !foto.getLikers().isEmpty();
 		
 		this.likers.addAll(LikerResponse.map(foto.getLikers()));
 		this.comentarios.addAll(ComentarioResponse.map(foto.getComentarios()));
+	}
+	
+	public String getComentario() {
+		return comentario;
 	}
 
 	public String getUrlPerfil() {
