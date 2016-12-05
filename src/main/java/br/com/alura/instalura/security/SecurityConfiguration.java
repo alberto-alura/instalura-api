@@ -32,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {		
 		http.authorizeRequests()
 		.antMatchers("/api/public/**").permitAll()
+		.antMatchers("/gera/dados").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/login").permitAll()		
 		
 		.anyRequest().authenticated()
