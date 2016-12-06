@@ -27,7 +27,6 @@ import br.com.alura.instalura.models.Foto;
 import br.com.alura.instalura.models.Usuario;
 
 @RestController
-@CrossOrigin
 public class FotosController {
 
 	@Autowired

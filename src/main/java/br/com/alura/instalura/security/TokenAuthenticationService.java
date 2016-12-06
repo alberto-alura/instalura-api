@@ -1,5 +1,7 @@
 package br.com.alura.instalura.security;
 
+import io.jsonwebtoken.MalformedJwtException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,30 +12,34 @@ import org.springframework.util.StringUtils;
 
 public class TokenAuthenticationService {
 
-    public static final String AUTH_HEADER_NAME = "X-AUTH-TOKEN";
+	public static final String AUTH_HEADER_NAME = "X-AUTH-TOKEN";
 
-    private final TokenHandler tokenHandler;
+	private final TokenHandler tokenHandler;
 
-    public TokenAuthenticationService(String secret, UserDetailsService userService) {
-        tokenHandler = new TokenHandler(secret, userService);
-    }
+	public TokenAuthenticationService(String secret, UserDetailsService userService) {
+		tokenHandler = new TokenHandler(secret, userService);
+	}
 
-    public void addAuthentication(HttpServletResponse response, UserAuthentication authentication) {
-        final UserDetails user = authentication.getDetails();
-        response.addHeader(AUTH_HEADER_NAME, tokenHandler.createTokenForUser(user));
-    }
+	public void addAuthentication(HttpServletResponse response, UserAuthentication authentication) {
+		final UserDetails user = authentication.getDetails();
+		response.addHeader(AUTH_HEADER_NAME, tokenHandler.createTokenForUser(user));
+	}
 
-    public Authentication getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(AUTH_HEADER_NAME);
-        if(!StringUtils.hasText(token)) {
-        	token = request.getParameter(AUTH_HEADER_NAME);
-        }
-        if (token != null && !token.equals("null")) {
-            final UserDetails user = tokenHandler.parseUserFromToken(token);
-            if (user != null) {
-                return new UserAuthentication(user);
-            }
-        }
-        return null;
-    }
+	public Authentication getAuthentication(HttpServletRequest request) {
+		String token = request.getHeader(AUTH_HEADER_NAME);
+		if (!StringUtils.hasText(token)) {
+			token = request.getParameter(AUTH_HEADER_NAME);
+		}
+		if (token != null) {
+			try {
+				final UserDetails user = tokenHandler.parseUserFromToken(token);
+				if (user != null) {
+					return new UserAuthentication(user);
+				}
+			} catch (MalformedJwtException exception) {				
+				return null;
+			}
+		}
+		return null;
+	}
 }
