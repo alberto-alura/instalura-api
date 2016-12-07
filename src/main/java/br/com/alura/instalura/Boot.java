@@ -27,7 +27,8 @@ public class Boot {
 		config.addAllowedMethod("*");
 		source.registerCorsConfiguration("/**", config);
 		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-		bean.setOrder(0);
+		//jogando a ordem lá para baixo, tem que rodar do filtro do security.
+		bean.setOrder(-100000);
 		return bean;
 	}	
 }

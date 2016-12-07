@@ -36,7 +36,8 @@ public class TokenAuthenticationService {
 				if (user != null) {
 					return new UserAuthentication(user);
 				}
-			} catch (MalformedJwtException exception) {				
+			} catch (MalformedJwtException exception) {		
+				exception.printStackTrace();
 				return null;
 			}
 		}
