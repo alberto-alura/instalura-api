@@ -79,4 +79,13 @@ public class FotoResponse {
 				.map(foto -> new FotoResponse(foto, usuarioLogado))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public String toString() {
+		return "FotoResponse [urlPerfil=" + urlPerfil + ", loginUsuario=" + loginUsuario + ", horario=" + horario
+				+ ", urlFoto=" + urlFoto + ", id=" + id + ", likeada=" + likeada + ", likers=" + likers
+				+ ", comentarios=" + comentarios + ", comentario=" + comentario + "]";
+	}
+	
+	
 }

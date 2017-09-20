@@ -42,7 +42,6 @@ public class FotosController {
 	@Transactional
 	@PostMapping(value = "/api/fotos/{idFoto}/like", produces = MediaType.APPLICATION_JSON_VALUE)
 	public LikerResponse like(@PathVariable("idFoto") Integer id,@AuthenticationPrincipal Usuario logado) {
-		
 		Foto foto = fotoDao.findOne(id);		
 		foto.toggleLike(logado);
 		return new LikerResponse(logado);
@@ -53,7 +52,6 @@ public class FotosController {
 		consumes = MediaType.APPLICATION_JSON_VALUE, 
 		produces = MediaType.APPLICATION_JSON_VALUE)
 	public ComentarioResponse comment(@RequestBody ComentarioForm comentarioForm, @PathVariable("idFoto") Integer idFoto,@AuthenticationPrincipal Usuario logado ) {
-		
 		Comentario comentario = comentarioForm.build(logado);
 		comentarioDao.save(comentario);
 		
@@ -68,7 +66,6 @@ public class FotosController {
 	@PreAuthorize("permitAll")
 	public List<FotoResponse> buscaPorLogin(@AuthenticationPrincipal Usuario usuario,
 			@PathVariable("amigo") String amigo){
-		
 		if(usuario == null) {
 			usuario = new Usuario("1 Usuário Anônimo", "", "");
 		}

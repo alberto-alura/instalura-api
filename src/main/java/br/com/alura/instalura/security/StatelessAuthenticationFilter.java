@@ -14,17 +14,19 @@ import org.springframework.web.filter.GenericFilterBean;
 
 public class StatelessAuthenticationFilter extends GenericFilterBean {
 
-    private final TokenAuthenticationService authenticationService;
+    private final TokenAuthenticationService tokenAuthenticationService;
 
-    public StatelessAuthenticationFilter(TokenAuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
+    public StatelessAuthenticationFilter(TokenAuthenticationService tokenAuthenticationService) {
+        this.tokenAuthenticationService = tokenAuthenticationService;
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        Authentication authentication = authenticationService.getAuthentication(httpRequest);
+        
+    	HttpServletRequest httpRequest = (HttpServletRequest) request;
+    	Authentication authentication = tokenAuthenticationService.getAuthentication(httpRequest);
+    	
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
         SecurityContextHolder.getContext().setAuthentication(null);

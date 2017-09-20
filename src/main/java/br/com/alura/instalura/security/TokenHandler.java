@@ -9,11 +9,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public final class TokenHandler {
 
     private final String secret;
-    private final UserDetailsService userService;
+    private final UserDetailsService userDetailsService;
 
-    public TokenHandler(String secret, UserDetailsService userService) {
+    public TokenHandler(String secret, UserDetailsService userDetailsService) {
         this.secret = secret;
-        this.userService = userService;
+        this.userDetailsService = userDetailsService;
     }
 
     public UserDetails parseUserFromToken(String token) {    	
@@ -22,7 +22,7 @@ public final class TokenHandler {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-        return userService.loadUserByUsername(username);
+        return userDetailsService.loadUserByUsername(username);
     }
 
     public String createTokenForUser(UserDetails user) {
