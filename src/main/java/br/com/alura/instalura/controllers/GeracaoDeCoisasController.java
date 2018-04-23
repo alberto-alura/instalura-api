@@ -21,9 +21,9 @@ public class GeracaoDeCoisasController {
 	private EntityManager em;
 
 	private List<Usuario> geraUsuariosEAmigos() {
-		Usuario alberto = new Usuario("alots", "123456","https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/11199408_569104449895751_1837574990_a.jpg");
-		Usuario rafael = new Usuario("rafael", "123456","https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/s150x150/12599387_1591433254512484_973178862_a.jpg");
-		Usuario vitor = new Usuario("vitor", "123456","https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/11348357_521348038019129_1965512179_a.jpg");
+		Usuario alberto = new Usuario("alots", "123456","https://instagram.fcgh9-1.fna.fbcdn.net/vp/960227fa1524bee9e36610f8da71889c/5B6F42E1/t51.2885-19/11199408_569104449895751_1837574990_a.jpg");
+		Usuario rafael = new Usuario("rafael", "123456","https://instagram.fcgh9-1.fna.fbcdn.net/vp/faf1cd7c1d50bbf382cad0d43df15a49/5B5FF9ED/t51.2885-19/s150x150/12599387_1591433254512484_973178862_a.jpg");
+		Usuario vitor = new Usuario("vitor", "123456","https://instagram.fcgh9-1.fna.fbcdn.net/vp/671f159e4aa9c3f6f3f4107305cf1462/5B5747E6/t51.2885-19/s150x150/23417279_144305519547753_7852761162822189056_n.jpg");
 		
 		
 		alberto.adicionaAmigo(rafael);
