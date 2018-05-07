@@ -26,7 +26,6 @@ import br.com.alura.instalura.daos.ComentarioDao;
 import br.com.alura.instalura.daos.FotoDao;
 import br.com.alura.instalura.daos.UsuarioDao;
 import br.com.alura.instalura.dtos.inputs.ComentarioForm;
-import br.com.alura.instalura.dtos.inputs.NovaFotoForm;
 import br.com.alura.instalura.dtos.outputs.ComentarioResponse;
 import br.com.alura.instalura.dtos.outputs.FotoResponse;
 import br.com.alura.instalura.dtos.outputs.LikerResponse;
