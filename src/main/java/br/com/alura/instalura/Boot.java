@@ -4,9 +4,11 @@ import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-
-import br.com.alura.instalura.conf.GenerateInitialDataConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import br.com.alura.instalura.models.Usuario;
 import springfox.documentation.builders.ParameterBuilder;
@@ -18,20 +20,13 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-<<<<<<< HEAD
-=======
-@Controller
 @EnableSwagger2
->>>>>>> work
 public class Boot {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(Boot.class, args);
-		context.getBean(GenerateInitialDataConfiguration.class).generate();
+		SpringApplication.run(Boot.class, args);
 	}
 	
-<<<<<<< HEAD
-=======
 	@Bean
 	public FilterRegistrationBean corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -56,5 +51,4 @@ public class Boot {
 						.description("Description of header").modelRef(new ModelRef("string"))
 						.parameterType("header").required(false).build()));
 	}	
->>>>>>> work
 }

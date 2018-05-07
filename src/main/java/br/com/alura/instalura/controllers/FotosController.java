@@ -44,7 +44,7 @@ public class FotosController {
 	@GetMapping(value = "/api/fotos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<FotoResponse> busca(@AuthenticationPrincipal Usuario logado) {
 		List<Foto> fotos = fotoDao.buscaFotosDosAmigos(logado.getId());
-		return FotoResponse.map(fotos, logado);
+		return FotoResponse.map(fotos);
 	}
 
 	@Transactional

@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.com.alura.instalura.models.Foto;
-import br.com.alura.instalura.models.Usuario;
 
 public class FotoResponse {
 
@@ -22,17 +21,14 @@ public class FotoResponse {
 	private List<ComentarioResponse> comentarios = new ArrayList<>();
 	private String comentario;
 
-	public FotoResponse(Foto foto, Usuario usuarioLogado){
+	public FotoResponse(Foto foto){
 		this.urlPerfil = foto.getUsuario().getUrlFotoPerfil();
 		this.loginUsuario= foto.getUsuario().getLogin();
 		this.horario = foto.getInstante().format(DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm"));
 		this.urlFoto = foto.getUrl();
 		this.id = foto.getId();
 		this.comentario = foto.getComentario();
-		this.likeada = !foto.getLikers().stream()
-				.filter(liker -> liker.getLogin().equals(usuarioLogado.getLogin()))
-				.collect(Collectors.toList())
-				.isEmpty();
+		this.likeada = !foto.getLikers().isEmpty();
 		
 		this.likers.addAll(LikerResponse.map(foto.getLikers()));
 		this.comentarios.addAll(ComentarioResponse.map(foto.getComentarios()));
@@ -74,18 +70,7 @@ public class FotoResponse {
 		return comentarios;
 	}
 	
-	public static List<FotoResponse> map(List<Foto> fotos, Usuario usuarioLogado) {
-		return fotos.stream()
-				.map(foto -> new FotoResponse(foto, usuarioLogado))
-				.collect(Collectors.toList());
+	public static List<FotoResponse> map(List<Foto> fotos) {
+		return fotos.stream().map(FotoResponse :: new).collect(Collectors.toList());
 	}
-
-	@Override
-	public String toString() {
-		return "FotoResponse [urlPerfil=" + urlPerfil + ", loginUsuario=" + loginUsuario + ", horario=" + horario
-				+ ", urlFoto=" + urlFoto + ", id=" + id + ", likeada=" + likeada + ", likers=" + likers
-				+ ", comentarios=" + comentarios + ", comentario=" + comentario + "]";
-	}
-	
-	
 }
