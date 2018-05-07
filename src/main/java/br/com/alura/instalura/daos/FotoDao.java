@@ -12,10 +12,10 @@ import br.com.alura.instalura.models.Foto;
 @Repository
 public interface FotoDao extends CrudRepository<Foto, Integer>{
 
-	@Query("select f from Foto f where f.usuario.id in (select amigo.id from Usuario u join u.amigos amigo where u.id = :idUsuario)")
+	@Query("select f from Foto f where f.removedInstant is null and f.usuario.id in (select amigo.id from Usuario u join u.amigos amigo where u.id = :idUsuario)")
 	List<Foto> buscaFotosDosAmigos(@Param("idUsuario") Integer idUsuario);
 
-	@Query("select f from Foto f where f.usuario.login = :q")
+	@Query("select f from Foto f where f.removedInstant is null and f.usuario.login = :q")
 	List<Foto> buscaFotosPeloUsuario(@Param("q")String q);
 
 }

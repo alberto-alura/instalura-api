@@ -5,10 +5,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +52,15 @@ public class FotosController {
 		Foto foto = fotoDao.findOne(id);		
 		foto.toggleLike(logado);
 		return new LikerResponse(logado);
+	}
+	
+	@DeleteMapping("/api/fotos/{idFoto}")
+	@Transactional
+	public HttpEntity<?> remove(@PathVariable("idFoto") Integer idFoto) {		
+		Foto foto = fotoDao.findOne(idFoto);
+		foto.remove();
+		
+		return ResponseEntity.ok().build();
 	}
 
 	@Transactional

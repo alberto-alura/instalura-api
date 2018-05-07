@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.util.Assert;
 
 @Entity
 public class Foto {
@@ -34,7 +35,8 @@ public class Foto {
 	@OneToMany
 	private List<Comentario> comentarios = new ArrayList<>();
 	@NotBlank
-	private String comentario;
+	private String comentario;	
+	private LocalDateTime removedInstant;
 	
 	/**
 	 * @deprecated
@@ -96,6 +98,11 @@ public class Foto {
 	 */
 	public boolean toggleLike(Usuario usuario) {
 		return likers.contains(usuario) ? likers.remove(usuario) : likers.add(usuario);
+	}
+	
+	public void remove() {
+		Assert.isNull(removedInstant);
+		this.removedInstant = LocalDateTime.now();
 	}
 	
 }

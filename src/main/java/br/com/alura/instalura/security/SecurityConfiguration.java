@@ -27,6 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		this.tokenAuthenticationService = new TokenAuthenticationService("tooManySecrets", users);
 	}
 
+	
+	/*
+	 * alots -> eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbG90cyJ9.AQrl-JRJg39KeKYxMfNpnljXwxu0WOa8iYxT1Ih9Be-832MQBrJ5DxHwJzyQ-P-wp9lP49fSCmr_St-kl97nPw
+	 * vitor -> eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2aXRvciJ9.1kUf7_VXsh4ZNkB6uXX2CBlBOM0qSMDWEAyJwwGtStGBeBN7PhOBN-5ui2xmGe-fQlmjRkWWiEnuOEuCMW1WMA
+	 */
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {		
