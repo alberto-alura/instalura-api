@@ -5,7 +5,7 @@ import org.springframework.validation.Validator;
 
 import br.com.alura.instalura.dtos.inputs.NovoUsuarioForm;
 
-public class UsuarioESenhaDiferentes implements Validator {
+public class UsuarioESenhaDiferentesValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {

@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.instalura.daos.UsuarioDao;
 import br.com.alura.instalura.dtos.inputs.NovoUsuarioForm;
-import br.com.alura.instalura.validators.UsuarioESenhaDiferentes;
+import br.com.alura.instalura.validators.NovoUsuarioValidator;
+import br.com.alura.instalura.validators.UsuarioESenhaDiferentesValidator;
 
 @RestController
 public class UsuariosController {
@@ -24,7 +25,7 @@ public class UsuariosController {
 	
 	@InitBinder("novoUsuarioForm")
 	public void init(WebDataBinder binder) {
-		binder.addValidators(new UsuarioESenhaDiferentes());
+		binder.addValidators(new UsuarioESenhaDiferentesValidator(),new NovoUsuarioValidator(usuarioDao));
 	}
 
 	
