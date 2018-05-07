@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -37,6 +38,8 @@ public class Foto {
 	@NotBlank
 	private String comentario;	
 	private LocalDateTime removedInstant;
+	@Lob
+	private byte[] bytes;
 	
 	/**
 	 * @deprecated
@@ -53,12 +56,27 @@ public class Foto {
 		this.usuario = usuario;
 	}
 	
+	public Foto(String comentario, Usuario usuario, byte[] bytes) {
+		this.comentario = comentario;
+		this.usuario = usuario;
+		this.bytes = bytes;
+	}
+
+
 	public String getComentario() {
 		return comentario;
 	}
 	
 	public String getUrl() {
+		if(bytes != null) {
+			return "/api/fotos/"+this.id+"/stream";
+		}
 		return url;
+	}
+	
+	public byte[] getBytes() {
+		Assert.notNull(bytes); 
+		return bytes;
 	}
 	
 	public Integer getId() {
