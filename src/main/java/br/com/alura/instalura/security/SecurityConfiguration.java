@@ -47,7 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/v2/api-docs/**").permitAll()
 		.antMatchers("/configuration/**").permitAll()
 		.antMatchers("/usuarios/**").permitAll()
-		
+			.and()
+			.cors()
 			.and()
 			.csrf().disable()
 		
