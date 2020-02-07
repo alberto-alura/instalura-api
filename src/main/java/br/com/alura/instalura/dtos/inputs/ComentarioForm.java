@@ -11,7 +11,7 @@ public class ComentarioForm {
 		return texto;
 	}
 
-	public Comentario build(Usuario alberto) {
-		return new Comentario(alberto, texto);
+	public Comentario build(Usuario usuario) {
+		return new Comentario(usuario, texto);
 	}
 }
